@@ -6,7 +6,8 @@ import (
 
 func (s *Server) isAdmin(h http.HandlerFunc) http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
-		// just execute original handler for moment
+
+		// check if current user is admin (somehow?)
 		h(w, r)
 	}
 }

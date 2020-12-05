@@ -6,11 +6,10 @@ import (
 	"net/http"
 )
 
-
 func (s *Server) handleGreeting(msg string) http.HandlerFunc {
 
 	type request struct {
-		Name string  `json:"name"`
+		Name string `json:"name"`
 	}
 
 	return func(w http.ResponseWriter, r *http.Request) {
@@ -32,4 +31,3 @@ func (s *Server) handleGreeting(msg string) http.HandlerFunc {
 		}
 	}
 }
-

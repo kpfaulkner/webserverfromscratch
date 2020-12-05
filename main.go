@@ -8,7 +8,7 @@ import (
 	"os"
 )
 
-func  InitializeLogging(logFile string) {
+func InitializeLogging(logFile string) {
 
 	var file, err = os.OpenFile(logFile, os.O_RDWR|os.O_CREATE|os.O_APPEND, 0666)
 	if err != nil {
@@ -24,14 +24,10 @@ func main() {
 	fmt.Printf("so it begins...\n")
 
 	InitializeLogging("test.log")
+	svr := server.NewServer()
+	svr.Use(server.CheckJWT())
+	svr.Use(server.WithLogging())
 
-	/*
-	srv := server.NewServer()
-	// adding logging middleware to server.
-	loggerMW := server.WithLogging()
-	serverWithLogging := loggerMW(srv) */
-
-	serverWithLogging := server.NewServerWithLogging()
-	err := http.ListenAndServe(":8080", serverWithLogging)
+	err := http.ListenAndServe(":8080", svr.GetServerWithMiddleware())
 	fmt.Printf("err is %s\n", err.Error())
 }

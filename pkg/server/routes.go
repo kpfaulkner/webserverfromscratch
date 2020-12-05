@@ -5,7 +5,7 @@ package server
 // separate structs or methods off structs handling registration. Do it all
 // here so we just have one place to look!
 func (s *Server) routes() {
-	s.router.HandleFunc("/api/", s.handleAPI())
+	s.router.HandleFunc("/api/", s.checkJWT(s.isAdmin(s.handleAPI())))
 	s.router.HandleFunc("/greetings", s.handleGreeting("hello"))
 	s.router.HandleFunc("/", s.handleIndex())
 }

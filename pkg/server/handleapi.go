@@ -11,4 +11,3 @@ func (s *Server) handleAPI() http.HandlerFunc {
 		fmt.Fprintf(w, "blah blah blah")
 	}
 }
-
