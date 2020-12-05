@@ -14,7 +14,8 @@ func (s *Server) handleGreeting(msg string) http.HandlerFunc {
 
 	return func(w http.ResponseWriter, r *http.Request) {
 
-		if r.Method == http.MethodPost {
+		switch r.Method {
+		case http.MethodPost:
 			decoder := json.NewDecoder(r.Body)
 			var t request
 			err := decoder.Decode(&t)
@@ -25,9 +26,9 @@ func (s *Server) handleGreeting(msg string) http.HandlerFunc {
 			}
 
 			fmt.Fprintf(w, fmt.Sprintf("custom message for %s: %s", t.Name, msg))
-
-		} else {
-			fmt.Fprintf(w, "Can only perform POSTs")
+			
+		case http.MethodGet:
+			fmt.Fprintf(w, "GET GET GET BLAH BLAH BLAH")
 		}
 	}
 }

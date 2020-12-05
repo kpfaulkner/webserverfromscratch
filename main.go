@@ -25,7 +25,7 @@ func main() {
 
 	InitializeLogging("test.log")
 	svr := server.NewServer()
-	svr.Use(server.CheckJWT())
+	//svr.Use(server.CheckJWT())
 	svr.Use(server.WithLogging())
 
 	err := http.ListenAndServe(":8080", svr.GetServerWithMiddleware())
