@@ -1,7 +1,6 @@
 package pkg
 
 type Router struct {
-
 }
 
 func NewRouter() *Router {

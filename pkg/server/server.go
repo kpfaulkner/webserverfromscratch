@@ -15,6 +15,13 @@ func NewServer() *Server {
 	return &s
 }
 
+func NewServerWithLogging() http.Handler {
+	server := NewServer()
+	loggerMW := WithLogging()
+	serverWithLogging := loggerMW(server)
+	return serverWithLogging
+}
+
 func (s *Server) ServeHTTP(w http.ResponseWriter, r *http.Request) {
-	s.router.ServeHTTP(w,r)
+	s.router.ServeHTTP(w, r)
 }
